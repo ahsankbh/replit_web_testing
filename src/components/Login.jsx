@@ -39,7 +39,7 @@ function Login() {
     if (validateEmail(email) && validatePassword(password)) {
       try {
         const response = await fetch(
-          "https://c5c47056-20bb-4c07-9281-7d28a2ff6f09-00-28bbrpmd56p14.pike.replit.dev:3000/login",
+          "https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:3000/login",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
