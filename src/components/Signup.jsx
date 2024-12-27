@@ -1,8 +1,7 @@
 import React, { useState } from "react";
+import logo from "../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/images/logo.png"; // Replace with your logo file name
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// Replace with your logo file name
 
 function Signup() {
   const [name, setName] = useState("");
@@ -13,7 +12,6 @@ function Signup() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
   const handleNameChange = (e) => {
@@ -63,8 +61,6 @@ function Signup() {
       validatePassword(password) &&
       confirmPassword === password
     ) {
-      setIsLoading(true); // Set loading state to true
-
       try {
         // Send data to backend API for signup
         const response = await fetch(
@@ -78,57 +74,20 @@ function Signup() {
 
         if (response.ok) {
           console.log("Signup successful!");
-          toast.success("Signup successful!", {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          navigate("/login"); // Redirect to the login page using useNavigate
+          // alert("Signup successful! Redirecting to login...");
+          navigate("/login");
         } else if (response.status === 409) {
           const error = await response.json();
           console.error("Error:", error.error);
-          toast.error(error.error, {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          alert("Email already exists. Please use a different email.");
         } else {
           const error = await response.json();
           console.error("Error:", error.error);
-          toast.error("An error occurred during signup. Please try again.", {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          alert("An error occurred during signup. Please try again.");
         }
       } catch (error) {
         console.error("Error during signup:", error);
-        toast.error(
-          "Unable to connect to the server. Please try again later.",
-          {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          },
-        );
-      } finally {
-        setIsLoading(false); // Set loading state to false after the request is finished
+        alert("Unable to connect to the server. Please try again later.");
       }
     } else {
       console.log("Please correct the errors in the form.");
@@ -246,24 +205,8 @@ function Signup() {
           <button
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
-            disabled={isLoading} // Disable button while loading
           >
-            {isLoading ? (
-              <svg
-                className="animate-spin h-5 w-5 text-white"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-75"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  strokeLinecap="round"
-                />
-              </svg>
-            ) : (
-              "Sign up"
-            )}
+            Sign up
           </button>
         </form>
       </div>
