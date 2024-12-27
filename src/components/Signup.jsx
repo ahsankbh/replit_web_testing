@@ -215,11 +215,13 @@ function Signup() {
             className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
             disabled={submitting} // Disable button while submitting
           >
-            {submitting ? ( // Show loading indicator when submitting
-              <LoadingSkeleton width={100} height={30} /> // Adjust size as needed
-            ) : (
-              "Sign up"
-            )}
+            <span>
+              {submitting ? ( // Show loading indicator when submitting
+                <LoadingSkeleton width={100} height={30} /> // Adjust size as needed
+              ) : (
+                "Sign up"
+              )}
+            </span>
           </button>
         </form>
       </div>
