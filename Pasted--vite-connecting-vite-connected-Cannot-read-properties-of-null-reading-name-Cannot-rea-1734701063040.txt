@@ -1,0 +1,27 @@
+[vite] connecting...
+[vite] connected.
+Cannot read properties of null (reading 'name')
+Cannot read properties of null (reading 'name')
+The above error occurred in the <Home> component:
+
+    at Home (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/src/components/Home.jsx:22:35)
+    at RenderedRoute (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/react-router-dom.js?v=99fd1bd0:5367:26)
+    at Routes (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/react-router-dom.js?v=99fd1bd0:6098:3)
+    at UserProvider (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/src/UserContext.jsx:20:25)
+    at App
+    at Router (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/react-router-dom.js?v=99fd1bd0:6041:13)
+    at BrowserRouter (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/react-router-dom.js?v=99fd1bd0:8095:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+Cannot read properties of null (reading 'name')
+at Home (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/src/components/Home.jsx:41:16)
+at renderWithHooks (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:12169:26)
+at mountIndeterminateComponent (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:14919:21)
+at beginWork (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:15900:22)
+at beginWork$1 (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:19747:22)
+at performUnitOfWork (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:19192:20)
+at workLoopSync (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:19131:13)
+at renderRootSync (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:19110:15)
+at recoverFromConcurrentError (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:18730:28)
+at performConcurrentWorkOnRoot (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:18678:30)

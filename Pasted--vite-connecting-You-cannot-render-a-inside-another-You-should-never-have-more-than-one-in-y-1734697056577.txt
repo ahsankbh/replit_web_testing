@@ -1,0 +1,25 @@
+[vite] connecting...
+You cannot render a  inside another . You should never have more than one in your app.
+You cannot render a  inside another . You should never have more than one in your app.
+The above error occurred in the <Router> component:
+
+    at Router (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/react-router-dom.js?v=99fd1bd0:6041:13)
+    at BrowserRouter (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/react-router-dom.js?v=99fd1bd0:8095:3)
+    at App
+    at Router (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/react-router-dom.js?v=99fd1bd0:6041:13)
+    at BrowserRouter (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/react-router-dom.js?v=99fd1bd0:8095:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+You cannot render a  inside another . You should never have more than one in your app.
+at invariant (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/react-router-dom.js?v=99fd1bd0:1190:11)
+at Router (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/react-router-dom.js?v=99fd1bd0:6048:3)
+at renderWithHooks (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:12169:26)
+at mountIndeterminateComponent (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:14919:21)
+at beginWork (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:15900:22)
+at beginWork$1 (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:19747:22)
+at performUnitOfWork (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:19192:20)
+at workLoopSync (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:19131:13)
+at renderRootSync (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:19110:15)
+at recoverFromConcurrentError (https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:5173/node_modules/.vite/deps/chunk-E6H7UI6X.js?v=99fd1bd0:18730:28)
+[vite] connected.

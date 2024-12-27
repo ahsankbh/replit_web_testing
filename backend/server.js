@@ -29,7 +29,7 @@ connection.connect((err, conn) => {
 
 // Signup route
 app.post("/signup", (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
 
   // Check if the email already exists
   connection.execute({
@@ -46,8 +46,8 @@ app.post("/signup", (req, res) => {
 
       // Insert the user
       connection.execute({
-        sqlText: `INSERT INTO users (email, password) VALUES (?, ?)`,
-        binds: [email, password],
+        sqlText: `INSERT INTO users (name, email, password) VALUES (?, ?, ?)`,
+        binds: [name, email, password],
         complete: (err) => {
           if (err) {
             console.error("Error creating user:", err);
@@ -60,12 +60,11 @@ app.post("/signup", (req, res) => {
   });
 });
 
-// Login route
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
   connection.execute({
-    sqlText: `SELECT 1 FROM users WHERE email = ? AND password = ?`,
+    sqlText: `SELECT email, password FROM users WHERE email = ? AND password = ?`, // Modified SQL query
     binds: [email, password],
     complete: (err, stmt, rows) => {
       if (err) {
@@ -73,13 +72,49 @@ app.post("/login", (req, res) => {
         return res.status(500).json({ error: "Internal server error" });
       }
       if (rows.length > 0) {
-        res.status(200).json({ message: "Login successful" });
+        res
+          .status(200)
+          .json({ email: rows[0].email, password: rows[0].password }); // Returning email and password
       } else {
         res.status(401).json({ error: "Invalid email or password" });
       }
     },
   });
 });
+
+app.get("/home", async (req, res) => {
+  try {
+    const email = req.query.email; // Get the email from the query parameter
+    const userData = await getUserData(email);
+    res.status(200).json(userData);
+  } catch (error) {
+    if (error.message === "User not found") {
+      res.status(404).json({ error: "User not found" });
+    } else {
+      console.error("Error fetching user data:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+});
+const getUserData = (email) => {
+  return new Promise((resolve, reject) => {
+    connection.execute({
+      sqlText: `SELECT name, email, password, created_at FROM users WHERE email = ?`, // Use the email for the query
+      binds: [email],
+      complete: (err, stmt, rows) => {
+        if (err) {
+          console.error("Error fetching user data:", err);
+          reject(err);
+        } else if (rows.length === 0) {
+          reject(new Error("User not found"));
+        } else {
+          resolve(rows[0]);
+        }
+      },
+    });
+  });
+};
+// ... rest of your code
 
 // Start server
 app.listen(port, "0.0.0.0", () => {
