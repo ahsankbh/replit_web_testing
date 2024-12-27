@@ -64,6 +64,7 @@ function Signup() {
       confirmPassword === password
     ) {
       setIsLoading(true); // Set loading state to true
+
       try {
         // Send data to backend API for signup
         const response = await fetch(
