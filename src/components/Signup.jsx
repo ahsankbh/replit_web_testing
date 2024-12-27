@@ -65,6 +65,7 @@ function Signup() {
       confirmPassword === password
     ) {
       try {
+        setSubmitting(true); // Set loading state to true
         // Send data to backend API for signup
         const response = await fetch(
           "https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:3000/signup",
@@ -77,8 +78,6 @@ function Signup() {
 
         if (response.ok) {
           console.log("Signup successful!");
-          // Display a loading indicator
-          setSubmitting(true);
           // After a short delay, redirect to login page
           setTimeout(() => {
             navigate("/login");
@@ -92,9 +91,11 @@ function Signup() {
           console.error("Error:", error.error);
           alert("An error occurred during signup. Please try again.");
         }
+        setSubmitting(false); // Set loading state to false after the response
       } catch (error) {
         console.error("Error during signup:", error);
         alert("Unable to connect to the server. Please try again later.");
+        setSubmitting(false); // Set loading state to false after the catch block
       }
     } else {
       console.log("Please correct the errors in the form.");
