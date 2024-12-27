@@ -1,13 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import logo from "../assets/images/logo.png";
+import CircularProgress from "@mui/material/CircularProgress";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} {...props} />;
+});
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
+  const [open, setOpen] = useState(false); // State for toast message
   const navigate = useNavigate();
   const { setUserId } = useContext(UserContext);
 
@@ -39,6 +48,8 @@ function Login() {
     e.preventDefault();
 
     if (validateEmail(email) && validatePassword(password)) {
+      setIsLoading(true); // Show loading indicator
+
       try {
         const response = await fetch(
           "https://40ba4806-fabd-42c1-b9ab-f6cfa1447955-00-v6bom5jytel1.pike.replit.dev:3000/login",
@@ -53,6 +64,7 @@ function Login() {
           const data = await response.json();
           setUserId(data.email); // Set the user ID to the email
           navigate("/"); // Redirect to home page
+          setOpen(true); // Show toast message
         } else {
           const error = await response.json();
           console.error("Login failed:", error.error);
@@ -61,10 +73,20 @@ function Login() {
       } catch (error) {
         console.error("Error during login:", error);
         alert("An unexpected error occurred. Please try again later.");
+      } finally {
+        setIsLoading(false); // Hide loading indicator
       }
     } else {
       console.log("Please correct the errors in the form.");
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -136,21 +158,25 @@ function Login() {
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                <svg
-                  className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7v2a3 3 0 006 0v-2h2V7a3 3 0 00-6 0v2H7V7a5 5 0 0110 0v2z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
+              {isLoading ? (
+                <CircularProgress size={24} sx={{ color: "white" }} />
+              ) : (
+                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                  <svg
+                    className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7v2a3 3 0 006 0v-2h2V7a3 3 0 00-6 0v2H7V7a5 5 0 0110 0v2z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              )}
               Sign in
             </button>
           </div>
@@ -176,6 +202,11 @@ function Login() {
           </div>
         </form>
       </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Login Successful!
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

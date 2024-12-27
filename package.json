@@ -24,6 +24,9 @@
     "vite": "^5.0.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.3.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
