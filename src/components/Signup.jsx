@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import logo from "../assets/images/logo.png"; // Replace with your logo file name
+import logo from "../assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
+// Replace with your logo file name
 
 function Signup() {
   const [name, setName] = useState("");
@@ -10,6 +12,7 @@ function Signup() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+  const navigate = useNavigate();
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -71,9 +74,8 @@ function Signup() {
 
         if (response.ok) {
           console.log("Signup successful!");
-          alert("Signup successful! Redirecting to login...");
-          // Optionally redirect to login page:
-          // window.location.href = "/login";
+          // alert("Signup successful! Redirecting to login...");
+          navigate("/login");
         } else if (response.status === 409) {
           const error = await response.json();
           console.error("Error:", error.error);
