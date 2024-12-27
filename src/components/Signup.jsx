@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import logo from "../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
+import LoadingSkeleton from "react-loading-skeleton"; // Import the loading skeleton component
+
 // Replace with your logo file name
 
 function Signup() {
@@ -12,6 +14,7 @@ function Signup() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+  const [submitting, setSubmitting] = useState(false); // State for loading
   const navigate = useNavigate();
 
   const handleNameChange = (e) => {
@@ -74,8 +77,12 @@ function Signup() {
 
         if (response.ok) {
           console.log("Signup successful!");
-          // alert("Signup successful! Redirecting to login...");
-          navigate("/login");
+          // Display a loading indicator
+          setSubmitting(true);
+          // After a short delay, redirect to login page
+          setTimeout(() => {
+            navigate("/login");
+          }, 1000); // Adjust the delay as needed
         } else if (response.status === 409) {
           const error = await response.json();
           console.error("Error:", error.error);
@@ -205,8 +212,13 @@ function Signup() {
           <button
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
+            disabled={submitting} // Disable button while submitting
           >
-            Sign up
+            {submitting ? ( // Show loading indicator when submitting
+              <LoadingSkeleton width={100} height={30} /> // Adjust size as needed
+            ) : (
+              "Sign up"
+            )}
           </button>
         </form>
       </div>
