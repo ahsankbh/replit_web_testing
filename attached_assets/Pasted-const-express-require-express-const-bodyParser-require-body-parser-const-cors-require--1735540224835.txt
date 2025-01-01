@@ -60,30 +60,9 @@ app.post("/signup", (req, res) => {
   });
 });
 
-// app.post("/login", (req, res) => {
-//   const { email, password } = req.body;
-
-//   connection.execute({
-//     sqlText: `SELECT email, password FROM users WHERE email = ? AND password = ?`, // Modified SQL query
-//     binds: [email, password],
-//     complete: (err, stmt, rows) => {
-//       if (err) {
-//         console.error("Error logging in:", err);
-//         return res.status(500).json({ error: "Internal server error" });
-//       }
-//       if (rows.length > 0) {
-//         res
-//           .status(200)
-//           .json({ email: rows[0].email, password: rows[0].password }); // Returning email and password
-//       } else {
-//         res.status(401).json({ error: "Invalid email or password" });
-//       }
-//     },
-//   });
-// });
-
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
+
   connection.execute({
     sqlText: `SELECT email, password FROM users WHERE email = ? AND password = ?`, // Modified SQL query
     binds: [email, password],
@@ -93,7 +72,9 @@ app.post("/login", (req, res) => {
         return res.status(500).json({ error: "Internal server error" });
       }
       if (rows.length > 0) {
-        res.status(200).json({ email: rows[0].email }); // Returning only email
+        res
+          .status(200)
+          .json({ email: rows[0].email, password: rows[0].password }); // Returning email and password
       } else {
         res.status(401).json({ error: "Invalid email or password" });
       }

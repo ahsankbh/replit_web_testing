@@ -3,10 +3,10 @@ import React, { createContext, useState } from "react";
 const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {
-  const [userId, setUserId] = useState(null);
+  const [email, setEmail] = useState(localStorage.getItem("userEmail") || null);
 
   return (
-    <UserContext.Provider value={{ userId, setUserId }}>
+    <UserContext.Provider value={{ email, setEmail }}>
       {children}
     </UserContext.Provider>
   );
